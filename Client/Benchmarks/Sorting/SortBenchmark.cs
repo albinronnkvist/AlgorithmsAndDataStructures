@@ -1,6 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
 
 namespace Albin.AlgorithmsAndDataStructures.Client.Benchmarks.Sorting;
+
+[MemoryDiagnoser]
 public class SortBenchmark
 {
     private int[] _arr = null!;
