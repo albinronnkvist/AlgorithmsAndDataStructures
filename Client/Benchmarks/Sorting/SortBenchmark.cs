@@ -29,4 +29,10 @@ public class SortBenchmark
     {
         Core.Sorting.InsertionSort.Sort((int[])_arr.Clone());
     }
+
+    [Benchmark]
+    public void SelectionSort()
+    {
+        Core.Sorting.SelectionSort.Sort((int[])_arr.Clone());
+    }
 }
