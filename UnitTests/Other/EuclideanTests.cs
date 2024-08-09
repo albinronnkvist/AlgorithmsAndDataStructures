@@ -12,4 +12,12 @@ public class EuclideanTests
     {
         Euclidean.GCD(a, b).Should().Be(expectedGcd);
     }
+
+    [Theory]
+    [InlineData(12, 18, 36)]
+    [InlineData(4711, 777, 522921)]
+    public void LCM_ShouldReturnLeastCommonMultiple(int a, int b, int expectedLcm)
+    {
+        Euclidean.LCM(a, b).Should().Be(expectedLcm);
+    }
 }
