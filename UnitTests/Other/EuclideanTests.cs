@@ -1,5 +1,4 @@
 using Albin.AlgorithmsAndDataStructures.Core.Other;
-using FluentAssertions;
 
 namespace Albin.AlgorithmsAndDataStructures.UnitTests.Other;
 

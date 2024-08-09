@@ -1,6 +1,7 @@
 ﻿using Albin.AlgorithmsAndDataStructures.Core.Searching;
 
 namespace Albin.AlgorithmsAndDataStructures.UnitTests.Searching;
+
 public class BinarySearchTests
 {
     [Fact]
@@ -12,7 +13,7 @@ public class BinarySearchTests
 
         var result = BinarySearch.Search(arr, element);
 
-        Assert.Equal(expectedIndex, result);
+        result.Should().Be(expectedIndex);
     }
 
     [Fact]
@@ -23,7 +24,7 @@ public class BinarySearchTests
 
         var result = BinarySearch.Search(arr, element);
 
-        Assert.Equal(-1, result);
+        result.Should().Be(-1);
     }
 
     [Fact]
@@ -35,17 +36,17 @@ public class BinarySearchTests
 
         var result = BinarySearch.Search(arr, element);
 
-        Assert.Equal(expectedIndex, result);
+        result.Should().Be(expectedIndex);
     }
 
     [Fact]
     public void Search_ReturnsMinusOne_WhenEmptyArray()
     {
-        var arr = new int[] { };
+        var arr = Array.Empty<int>();
         const int element = 10;
 
         var result = BinarySearch.Search(arr, element);
 
-        Assert.Equal(-1, result);
+        result.Should().Be(-1);
     }
 }
