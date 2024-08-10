@@ -52,6 +52,14 @@ public class Stack<T>
         return _items[_count - 1];
     }
 
+    public void TrimExcess()
+    {
+        if (_count < _items.Length)
+        {
+            Resize(_count);
+        }
+    }
+
     private void Resize(int newSize)
     {
         T[] newArray = new T[newSize];

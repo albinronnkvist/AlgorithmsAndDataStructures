@@ -77,6 +77,27 @@ public class StackTests
         stack.Pop().Should().Be("Orange");
     }
 
+    [Fact]
+    public void MyImpl_TrimExcess_RemovesUnusedCapacity()
+    {
+        const int initialCapacity = 10;
+        var stack = new Core.DataStructures.Stack<string>(initialCapacity);
+
+        stack.Push("Red");
+        stack.Push("Green");
+        stack.Push("Blue");
+        stack.Push("Purple");
+
+        int capacityBefore = stack.Capacity;
+        stack.TrimExcess();
+        int capacityAfter = stack.Capacity;
+
+        using var assertionScope = new AssertionScope();
+        capacityBefore.Should().Be(initialCapacity);
+        capacityAfter.Should().Be(stack.Count);
+        stack.Count.Should().Be(4);
+    }
+
 
 
     // *************************
