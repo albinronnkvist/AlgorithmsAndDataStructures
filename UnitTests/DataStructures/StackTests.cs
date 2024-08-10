@@ -1,33 +1,52 @@
 using System.Reflection;
-using Albin.AlgorithmsAndDataStructures.Core.DataStructures;
 using FluentAssertions.Execution;
 
 namespace Albin.AlgorithmsAndDataStructures.UnitTests.DataStructures;
 
 public class StackTests
 {
-    // Using Custom Stack
+    // ***********************
+    // Using custom Stack<T> *
+    // ***********************
     [Fact]
-    public void MyImpl_Pop_TakesTopItem()
+    public void MyImpl_Pop_RemovesAndReturnsTopItem()
     {
-        var stack = new Stack(10);
+        var stack = new Core.DataStructures.Stack<string>();
 
-        stack.Push(1);
-        stack.Push(2);
-        stack.Push(3);
-        stack.Push(4);
-        stack.Push(5);
+        stack.Push("Red");
+        stack.Push("Green");
+        stack.Push("Blue");
+        stack.Push("Purple");
+        stack.Push("Orange");
 
-        stack.Pop().Should().Be(5);
+        using var assertionScope = new AssertionScope();
+        stack.Pop().Should().Be("Orange");
+        stack.Count.Should().Be(4);
+    }
+
+    [Fact]
+    public void MyImpl_Peek_ReturnsTopItem()
+    {
+        var stack = new Core.DataStructures.Stack<string>();
+
+        stack.Push("Red");
+        stack.Push("Green");
+        stack.Push("Blue");
+        stack.Push("Purple");
+        stack.Push("Orange");
+
+        using var assertionScope = new AssertionScope();
+        stack.Peek().Should().Be("Orange");
+        stack.Count.Should().Be(5);
     }
 
     [Fact]
     public void MyImpl_PopEmpty_ThrowsInvalidOperationException()
     {
-        var stack = new Stack(10);
+        var stack = new Core.DataStructures.Stack<string>();
 
-        stack.Push(1);
-        stack.Push(2);
+        stack.Push("Red");
+        stack.Push("Green");
 
         stack.Pop();
         stack.Pop();
@@ -37,24 +56,36 @@ public class StackTests
     }
 
     [Fact]
-    public void MyImpl_PushMoreItemsThanCapacity_ThrowsOverflowException()
+    public void MyImpl_PushMoreItemsThanInitialCapacity_AutomaticallyDoublesCapacity()
     {
-        var stack = new Stack(4);
+        const int initialCapacity = 4;
+        var stack = new Core.DataStructures.Stack<string>(initialCapacity);
 
-        stack.Push(1);
-        stack.Push(2);
-        stack.Push(3);
-        stack.Push(4);
+        stack.Push("Red");
+        stack.Push("Green");
+        stack.Push("Blue");
+        stack.Push("Purple");
 
-        Action act = () => stack.Push(5);
-        act.Should().Throw<OverflowException>();
+        int capacityBefore = stack.Capacity;
+        stack.Push("Orange");
+        int capacityAfter = stack.Capacity;
+
+        using var assertionScope = new AssertionScope();
+        capacityBefore.Should().Be(initialCapacity);
+        capacityAfter.Should().Be(capacityBefore * 2);
+        stack.Count.Should().Be(5);
+        stack.Pop().Should().Be("Orange");
     }
 
-    // Using standard Stack<T>
+
+
+    // *************************
+    // Using standard Stack<T> *
+    // *************************
     [Fact]
     public void Standard_Pop_RemovesAndReturnsTopItem()
     {
-        var stack = new Stack<string>();
+        var stack = new System.Collections.Generic.Stack<string>();
 
         stack.Push("Red");
         stack.Push("Green");
@@ -70,7 +101,7 @@ public class StackTests
     [Fact]
     public void Standard_Peek_ReturnsTopItem()
     {
-        var stack = new Stack<string>();
+        var stack = new System.Collections.Generic.Stack<string>();
 
         stack.Push("Red");
         stack.Push("Green");
@@ -86,7 +117,7 @@ public class StackTests
     [Fact]
     public void Standard_PopEmpty_ThrowsInvalidOperationException()
     {
-        var stack = new Stack<string>();
+        var stack = new System.Collections.Generic.Stack<string>();
 
         stack.Push("Red");
         stack.Push("Green");
@@ -107,7 +138,7 @@ public class StackTests
     public void Standard_PushMoreItemsThanInitialCapacity_AutomaticallyDoublesCapacity()
     {
         const int initialCapacity = 4;
-        var stack = new Stack<string>(initialCapacity);
+        var stack = new System.Collections.Generic.Stack<string>(initialCapacity);
 
         stack.Push("Red");
         stack.Push("Green");
@@ -128,7 +159,7 @@ public class StackTests
     [Fact]
     public void Standard_Clear()
     {
-        var stack = new Stack<string>();
+        var stack = new System.Collections.Generic.Stack<string>();
 
         stack.Push("Red");
         stack.Push("Green");
@@ -140,9 +171,9 @@ public class StackTests
         stack.Count.Should().Be(0);
     }
 
-    private int GetStackCapacity<T>(Stack<T> stack)
+    private int GetStackCapacity<T>(System.Collections.Generic.Stack<T> stack)
     {
-        var arrayField = typeof(Stack<T>)
+        var arrayField = typeof(System.Collections.Generic.Stack<T>)
             .GetField("_array", BindingFlags.NonPublic | BindingFlags.Instance);
 
         var array = arrayField?.GetValue(stack) as T[];

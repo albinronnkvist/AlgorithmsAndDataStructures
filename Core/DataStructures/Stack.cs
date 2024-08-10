@@ -1,38 +1,62 @@
 namespace Albin.AlgorithmsAndDataStructures.Core.DataStructures;
 
-// Simple example of a bounded Stack implemented with an array of integers for simplicity
+// Simple example of Stack implementation
 // Lib: Stack<T>
-public class Stack
+public class Stack<T>
 {
-    private int MaxSize { get; init; }
-    private int Top { get; set; }
-    private int[] Items { get; set; }
+    private T[] _items;
+    private int _count;
 
-    public Stack(int maxSize)
-    {
-        MaxSize = maxSize;
-        Top = 0;
-        Items = new int[MaxSize];
-    }
+    public int Count => _count;
+    public int Capacity => _items.Length;
 
-    public void Push(int item)
+    public Stack(int capacity = 10)
     {
-        if(Top == MaxSize){
-            throw new OverflowException();
+        if(capacity < 1)
+        {
+            throw new ArgumentOutOfRangeException("Capacity must be greater than 0", nameof(capacity));
         }
 
-        Items[Top] = item;
-        Top++;
+        _items = new T[capacity];
+        _count = 0;
     }
 
-    public int Pop()
+    public void Push(T item)
     {
-        if(Top is 0){
-            throw new InvalidOperationException();
+        if (_count == _items.Length)
+        {
+            Resize(_items.Length * 2);
         }
 
-        Top--;
-        return Items[Top];
+        _items[_count++] = item;
+    }
+
+    public T Pop()
+    {
+        if (_count is 0)
+        {
+            throw new InvalidOperationException("Stack is empty.");
+        }
+
+        T item = _items[--_count];
+        return item;
+    }
+
+    public T Peek()
+    {
+        if (_count is 0)
+        {
+            throw new InvalidOperationException("Stack is empty.");
+        }
+
+        return _items[_count - 1];
+    }
+
+    private void Resize(int newSize)
+    {
+        T[] newArray = new T[newSize];
+        Array.Copy(_items, newArray, _count);
+        _items = newArray;
     }
 }
 
