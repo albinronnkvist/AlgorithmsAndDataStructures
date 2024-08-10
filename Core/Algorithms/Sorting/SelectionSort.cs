@@ -1,4 +1,4 @@
-﻿namespace Albin.AlgorithmsAndDataStructures.Core.Sorting;
+﻿namespace Albin.AlgorithmsAndDataStructures.Core.Algorithms.Sorting;
 
 public static class SelectionSort
 {

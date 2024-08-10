@@ -1,6 +1,6 @@
-﻿using Albin.AlgorithmsAndDataStructures.Core.Sorting;
+﻿using Albin.AlgorithmsAndDataStructures.Core.Algorithms.Sorting;
 
-namespace Albin.AlgorithmsAndDataStructures.UnitTests.Sorting;
+namespace Albin.AlgorithmsAndDataStructures.UnitTests.Algorithms.Sorting;
 
 public class SelectionSortTests
 {
