@@ -1,6 +1,6 @@
-using Albin.AlgorithmsAndDataStructures.Core.Graph;
+using Albin.AlgorithmsAndDataStructures.Core.Algorithms.Graph;
 
-namespace Albin.AlgorithmsAndDataStructures.UnitTests.Graph;
+namespace Albin.AlgorithmsAndDataStructures.UnitTests.Algorithms.Graph;
 
 public class DijkstraTests
 {

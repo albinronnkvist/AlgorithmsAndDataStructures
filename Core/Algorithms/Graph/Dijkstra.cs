@@ -1,4 +1,4 @@
-namespace Albin.AlgorithmsAndDataStructures.Core.Graph;
+namespace Albin.AlgorithmsAndDataStructures.Core.Algorithms.Graph;
 
 public static class Dijkstra
 {
