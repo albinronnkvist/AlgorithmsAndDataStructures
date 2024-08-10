@@ -1,4 +1,4 @@
-﻿namespace Albin.AlgorithmsAndDataStructures.Core.Searching;
+﻿namespace Albin.AlgorithmsAndDataStructures.Core.Algorithms.Searching;
 
 public class BinarySearch
 {

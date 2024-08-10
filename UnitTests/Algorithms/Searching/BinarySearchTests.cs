@@ -1,6 +1,6 @@
-﻿using Albin.AlgorithmsAndDataStructures.Core.Searching;
+﻿using Albin.AlgorithmsAndDataStructures.Core.Algorithms.Searching;
 
-namespace Albin.AlgorithmsAndDataStructures.UnitTests.Searching;
+namespace Albin.AlgorithmsAndDataStructures.UnitTests.Algorithms.Searching;
 
 public class BinarySearchTests
 {
