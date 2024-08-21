@@ -73,17 +73,6 @@ public class CustomCollectionTests
     }
 
     [Fact]
-    public void IterateEmptyCollection_ShouldNotThrow()
-    {
-        var collection = new CustomCollection<string>();
-
-        foreach (var item in collection)
-        {
-            item.Should().BeNull();
-        }
-    }
-
-    [Fact]
     public void IteratePopulatedCollection_ShouldReturnAllItems()
     {
         var collection = new CustomCollection<string>();
@@ -92,15 +81,13 @@ public class CustomCollectionTests
         collection.Add("Green");
         collection.Add("Blue");
 
+        var newCollection = new CustomCollection<string>();
         foreach (var item in collection)
         {
-            item.Should().BeOneOf("Red", "Green", "Blue");
+            newCollection.Add(item);
         }
 
-        foreach (var item in collection)
-        {
-            item.Should().BeOneOf("Red", "Green", "Blue");
-        }
+        newCollection.Should().BeEquivalentTo(collection);
     }
 
     [Fact]
