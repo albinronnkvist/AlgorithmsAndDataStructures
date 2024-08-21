@@ -14,7 +14,7 @@ public class Stack<T>
     {
         if(capacity < 1)
         {
-            throw new ArgumentOutOfRangeException("Capacity must be greater than 0", nameof(capacity));
+            throw new ArgumentOutOfRangeException(nameof(capacity), "Capacity must be greater than 0");
         }
 
         _items = new T[capacity];
