@@ -25,7 +25,7 @@ public class CustomCollection<T> : ICustomCollection<T>
         _count = 0;
     }
 
-    public int Size => _count;
+    public int Count => _count;
     public int Capacity => _items.Length;
 
 

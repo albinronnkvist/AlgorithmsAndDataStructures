@@ -6,18 +6,18 @@ namespace Albin.AlgorithmsAndDataStructures.UnitTests.DataStructures;
 public class CustomCollectionTests
 {
     [Fact]
-    public void InitializeEmptyCollection_CollectionShouldBeEmpty_AndHaveZeroSize_AndDefaultCapacity()
+    public void InitializeEmptyCollection_CollectionShouldBeEmpty_AndHaveZeroCount_AndDefaultCapacity()
     {
         var collection = new CustomCollection<string>();
 
         using var assertionScope = new AssertionScope();
         collection.IsEmpty().Should().BeTrue();
-        collection.Size.Should().Be(0);
+        collection.Count.Should().Be(0);
         collection.Capacity.Should().Be(10);
     }
 
     [Fact]
-    public void AddItemsToCollection_CollectionShouldNotBeEmpty_AndShouldHaveExpectedSize()
+    public void AddItemsToCollection_CollectionShouldNotBeEmpty_AndShouldHaveExpectedCount()
     {
         var collection = new CustomCollection<string>();
 
@@ -27,7 +27,7 @@ public class CustomCollectionTests
 
         using var assertionScope = new AssertionScope();
         collection.IsEmpty().Should().BeFalse();
-        collection.Size.Should().Be(3);
+        collection.Count.Should().Be(3);
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public class CustomCollectionTests
         using var assertionScope = new AssertionScope();
         capacityBefore.Should().Be(initialCapacity);
         capacityAfter.Should().Be(initialCapacity * 2);
-        collection.Size.Should().Be(5);
+        collection.Count.Should().Be(5);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class CustomCollectionTests
         using var assertionScope = new AssertionScope();
         capacityBefore.Should().Be(initialCapacity);
         capacityAfter.Should().Be(4);
-        collection.Size.Should().Be(4);
+        collection.Count.Should().Be(4);
     }
 
     [Fact]
