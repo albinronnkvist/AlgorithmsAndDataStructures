@@ -58,8 +58,8 @@ public class StackTests
     [Fact]
     public void MyImpl_PushMoreItemsThanInitialCapacity_AutomaticallyDoublesCapacity()
     {
-        const int defaultCapacity = 4;
-        var stack = new Core.DataStructures.Stack<string>();
+        const int initialCapacity = 4;
+        var stack = new Core.DataStructures.Stack<string>(initialCapacity);
 
         stack.Push("Red");
         stack.Push("Green");
@@ -71,10 +71,85 @@ public class StackTests
         int capacityAfter = stack.Capacity;
 
         using var assertionScope = new AssertionScope();
-        capacityBefore.Should().Be(defaultCapacity);
-        capacityAfter.Should().Be(defaultCapacity * 2);
+        capacityBefore.Should().Be(initialCapacity);
+        capacityAfter.Should().Be(initialCapacity * 2);
         stack.Count.Should().Be(5);
         stack.Pop().Should().Be("Orange");
+    }
+
+    [Fact]
+    public void MyImpl_PopItemsUntilOneLessThanOneFourthOfCapacityRemains_AutomaticallyHalvesCapacity()
+    {
+        const int initialCapacity = 12;
+        const int oneLessThanOneFourthOfCapacity = 2;
+        var stack = new Core.DataStructures.Stack<string>(initialCapacity);
+
+        // Push 12 items
+        stack.Push("Red");
+        stack.Push("Green");
+        stack.Push("Blue");
+        stack.Push("Purple");
+        stack.Push("Orange");
+        stack.Push("Yellow");
+        stack.Push("Pink");
+        stack.Push("Brown");
+        stack.Push("Gray");
+        stack.Push("Black");
+        stack.Push("White");
+        stack.Push("Violet");
+
+        int capacityBefore = stack.Capacity;
+        for (int i = initialCapacity; i > oneLessThanOneFourthOfCapacity; i--)
+        {
+            stack.Pop();
+        }
+        int capacityAfter = stack.Capacity;
+
+        using var assertionScope = new AssertionScope();
+        capacityBefore.Should().Be(initialCapacity);
+        capacityAfter.Should().Be(initialCapacity / 2);
+        stack.Count.Should().Be(oneLessThanOneFourthOfCapacity);
+    }
+
+    [Fact]
+    public void MyImpl_PopAllItems_ShouldNotFurtherReduceCapacity()
+    {
+        const int initialCapacity = 12;
+        const int oneLessThanOneFourthOfCapacity = 2;
+        var stack = new Core.DataStructures.Stack<string>(initialCapacity);
+
+        // Push 12 items
+        stack.Push("Red");
+        stack.Push("Green");
+        stack.Push("Blue");
+        stack.Push("Purple");
+        stack.Push("Orange");
+        stack.Push("Yellow");
+        stack.Push("Pink");
+        stack.Push("Brown");
+        stack.Push("Gray");
+        stack.Push("Black");
+        stack.Push("White");
+        stack.Push("Violet");
+
+        int capacityBefore = stack.Capacity;
+        for (int i = initialCapacity; i > oneLessThanOneFourthOfCapacity; i--)
+        {
+            stack.Pop();
+        }
+        int capacityAfterOneFourthRemaining = stack.Capacity;
+
+        for (int i = oneLessThanOneFourthOfCapacity; i > 0; i--)
+        {
+            stack.Pop();
+        }
+        int capacityAfterNoRemaining = stack.Capacity;
+
+        using var assertionScope = new AssertionScope();
+        capacityBefore.Should().Be(initialCapacity);
+        capacityAfterOneFourthRemaining.Should().Be(initialCapacity / 2);
+        capacityAfterNoRemaining.Should().Be(capacityAfterOneFourthRemaining);
+        stack.Count.Should().Be(0);
     }
 
 

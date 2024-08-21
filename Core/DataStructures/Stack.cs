@@ -10,16 +10,10 @@ public interface IStack<T> : IEnumerable<T>
     int Capacity { get; }
 }
 
-public class Stack<T>
+public class Stack<T>(int capacity = 4)
 {
-    private T[] _items;
-    private int _count;
-
-    public Stack()
-    {
-        _items = new T[4];
-        _count = 0;
-    }
+    private T[] _items = new T[capacity];
+    private int _count = 0;
 
     public int Count => _count;
     public int Capacity => _items.Length;
@@ -42,6 +36,12 @@ public class Stack<T>
         }
 
         T item = _items[--_count];
+
+        if (_count > 0 && _count < _items.Length / 4)
+        {
+            Resize(_items.Length / 2);
+        }
+
         return item;
     }
 
