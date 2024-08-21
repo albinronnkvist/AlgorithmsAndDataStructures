@@ -13,20 +13,19 @@ public class Bag<T> : IBag<T>
 {
     private readonly List<T> _items = new List<T>();
 
-    public int Count 
-        => _items.Count;
+    public int Count => _items.Count;
 
-    public void Add(T item) 
-        => _items.Add(item);
+    /// <summary>
+    /// Adds an item to the bag.
+    /// </summary>
+    /// <param name="item">The item to be added.</param>
+    public void Add(T item) => _items.Add(item);
 
-    public bool IsEmpty()
-        => _items.Count is 0;
+    public bool IsEmpty() => _items.Count is 0;
 
-    public IEnumerator<T> GetEnumerator() 
-        => _items.GetEnumerator();
+    public IEnumerator<T> GetEnumerator() => _items.GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator() 
-        => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
 
 /*

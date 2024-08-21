@@ -22,6 +22,12 @@ public class Stack<T>(int capacity = 4) : IStack<T>
 
     public bool IsEmpty() => _count is 0;
 
+    /// <summary>
+    /// Pushes an item onto the stack.
+    /// 
+    /// If the stack is full, it will automatically double its capacity.
+    /// </summary>
+    /// <param name="item">The item to push onto the stack.</param>
     public void Push(T item)
     {
         if (_count == _items.Length)
@@ -32,6 +38,13 @@ public class Stack<T>(int capacity = 4) : IStack<T>
         _items[_count++] = item;
     }
 
+    /// <summary>
+    /// Removes and returns the top item from the stack.
+    /// 
+    /// If the stack becomes less than one-fourth full after removing an item, it will automatically halve its capacity.
+    /// </summary>
+    /// <returns>The item removed from the stack.</returns>
+    /// <exception cref="InvalidOperationException">If the stack is empty.</exception>
     public T Pop()
     {
         if (_count is 0)
@@ -50,6 +63,11 @@ public class Stack<T>(int capacity = 4) : IStack<T>
         return item;
     }
 
+    /// <summary>
+    /// Returns the top item from the stack without removing it.
+    /// </summary>
+    /// <returns>The top item from the stack.</returns>
+    /// <exception cref="InvalidOperationException">If the stack is empty.</exception>
     public T Peek()
     {
         if (_count is 0)
@@ -66,9 +84,13 @@ public class Stack<T>(int capacity = 4) : IStack<T>
 
 
 
-    private void Resize(int newSize)
+    /// <summary>
+    /// Creates a new array with the given size and copies the elements from the current array into it.
+    /// </summary>
+    /// <param name="newCapacity">The size of the new array.</param>
+    private void Resize(int newCapacity)
     {
-        T[] newArray = new T[newSize];
+        T[] newArray = new T[newCapacity];
         Array.Copy(_items, newArray, _count);
         _items = newArray;
     }
