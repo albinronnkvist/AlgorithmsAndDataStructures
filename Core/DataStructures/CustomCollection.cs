@@ -2,7 +2,14 @@ using System.Collections;
 
 namespace Albin.AlgorithmsAndDataStructures.Core.DataStructures;
 
-public class CustomCollection<T> : IEnumerable<T>
+public interface ICustomCollection<T> : IEnumerable<T>
+{
+    void Add(T item);
+    bool IsEmpty();
+    void TrimExcess();
+}
+
+public class CustomCollection<T> : ICustomCollection<T>
 {
     private T[] _items;
     private int _count;
@@ -19,9 +26,14 @@ public class CustomCollection<T> : IEnumerable<T>
     }
 
     public int Size => _count;
-    public bool IsEmpty() => _count is 0;
     public int Capacity => _items.Length;
 
+
+    /// <summary>
+    /// Adds an item to the collection.
+    /// If the current capacity is reached, the capacity is doubled.
+    /// </summary>
+    /// <param name="item">The item to be added.</param>
     public void Add(T item)
     {
         if (_count == _items.Length)
@@ -31,7 +43,14 @@ public class CustomCollection<T> : IEnumerable<T>
 
         _items[_count++] = item;
     }
+    
+    public bool IsEmpty() => _count is 0;
 
+    /// <summary>
+    /// Reduces the capacity of the collection to the current size.
+    /// This can be useful when the collection has been initialized with a large capacity
+    /// but the actual size is much smaller.
+    /// </summary>
     public void TrimExcess()
     {
         if (_count < _items.Length)

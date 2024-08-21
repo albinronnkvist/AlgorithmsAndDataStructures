@@ -143,7 +143,7 @@ public class CustomCollectionTests
         var enumerator = collection.GetEnumerator();
 
         using var assertionScope = new AssertionScope();
-        
+
         // Access Current before MoveNext is called
         Action act = () => { var current = enumerator.Current; };
         act.Should().Throw<InvalidOperationException>();
