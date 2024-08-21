@@ -36,6 +36,7 @@ public class Stack<T>(int capacity = 4)
         }
 
         T item = _items[--_count];
+        _items[_count] = default!;
 
         if (_count > 0 && _count < _items.Length / 4)
         {
