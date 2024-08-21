@@ -7,6 +7,8 @@ public interface ICustomCollection<T> : IEnumerable<T>
     void Add(T item);
     bool IsEmpty();
     void TrimExcess();
+    int Count { get; }
+    int Capacity { get; }
 }
 
 public class CustomCollection<T> : ICustomCollection<T>

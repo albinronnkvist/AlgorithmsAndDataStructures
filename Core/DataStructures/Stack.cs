@@ -6,6 +6,8 @@ public interface IStack<T> : IEnumerable<T>
     T Pop();
     T Peek();
     bool IsEmpty();
+    int Count { get; }
+    int Capacity { get; }
 }
 
 public class Stack<T>
