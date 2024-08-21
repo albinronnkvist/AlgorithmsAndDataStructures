@@ -1,25 +1,26 @@
 namespace Albin.AlgorithmsAndDataStructures.Core.DataStructures;
 
-// Simple example of Stack implementation
-// Lib: Stack<T>
+public interface IStack<T> : IEnumerable<T>
+{
+    void Push(T item);
+    T Pop();
+    T Peek();
+    bool IsEmpty();
+}
+
 public class Stack<T>
 {
     private T[] _items;
     private int _count;
 
-    public int Count => _count;
-    public int Capacity => _items.Length;
-
-    public Stack(int capacity = 10)
+    public Stack()
     {
-        if(capacity < 1)
-        {
-            throw new ArgumentOutOfRangeException(nameof(capacity), "Capacity must be greater than 0");
-        }
-
-        _items = new T[capacity];
+        _items = new T[4];
         _count = 0;
     }
+
+    public int Count => _count;
+    public int Capacity => _items.Length;
 
     public void Push(T item)
     {
@@ -50,14 +51,6 @@ public class Stack<T>
         }
 
         return _items[_count - 1];
-    }
-
-    public void TrimExcess()
-    {
-        if (_count < _items.Length)
-        {
-            Resize(_count);
-        }
     }
 
     private void Resize(int newSize)

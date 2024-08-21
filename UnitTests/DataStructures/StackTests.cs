@@ -58,8 +58,8 @@ public class StackTests
     [Fact]
     public void MyImpl_PushMoreItemsThanInitialCapacity_AutomaticallyDoublesCapacity()
     {
-        const int initialCapacity = 4;
-        var stack = new Core.DataStructures.Stack<string>(initialCapacity);
+        const int defaultCapacity = 4;
+        var stack = new Core.DataStructures.Stack<string>();
 
         stack.Push("Red");
         stack.Push("Green");
@@ -71,31 +71,10 @@ public class StackTests
         int capacityAfter = stack.Capacity;
 
         using var assertionScope = new AssertionScope();
-        capacityBefore.Should().Be(initialCapacity);
-        capacityAfter.Should().Be(capacityBefore * 2);
+        capacityBefore.Should().Be(defaultCapacity);
+        capacityAfter.Should().Be(defaultCapacity * 2);
         stack.Count.Should().Be(5);
         stack.Pop().Should().Be("Orange");
-    }
-
-    [Fact]
-    public void MyImpl_TrimExcess_RemovesUnusedCapacity()
-    {
-        const int initialCapacity = 10;
-        var stack = new Core.DataStructures.Stack<string>(initialCapacity);
-
-        stack.Push("Red");
-        stack.Push("Green");
-        stack.Push("Blue");
-        stack.Push("Purple");
-
-        int capacityBefore = stack.Capacity;
-        stack.TrimExcess();
-        int capacityAfter = stack.Capacity;
-
-        using var assertionScope = new AssertionScope();
-        capacityBefore.Should().Be(initialCapacity);
-        capacityAfter.Should().Be(stack.Count);
-        stack.Count.Should().Be(4);
     }
 
 
@@ -152,7 +131,7 @@ public class StackTests
 
     // If you know in advance that your stack will hold a large number of elements, 
     // specifying an initial capacity can reduce the number of memory allocations needed as the stack grows. 
-    // Without an initial capacity, the stack starts with a default size (usually small), and each time it needs to grow, 
+    // Without an initial capacity, the stack starts with a default size() (usually small), and each time it needs to grow, 
     // it will allocate a new, larger array and copy the elements over. 
     // This reallocation and copying can be costly in terms of both time and memory.
     [Fact]
