@@ -1,3 +1,5 @@
+using System.Collections;
+
 namespace Albin.AlgorithmsAndDataStructures.Core.DataStructures;
 
 public interface IStack<T> : IEnumerable<T>
@@ -10,13 +12,15 @@ public interface IStack<T> : IEnumerable<T>
     int Capacity { get; }
 }
 
-public class Stack<T>(int capacity = 4)
+public class Stack<T>(int capacity = 4) : IStack<T>
 {
     private T[] _items = new T[capacity];
     private int _count = 0;
 
     public int Count => _count;
     public int Capacity => _items.Length;
+
+    public bool IsEmpty() => _count is 0;
 
     public void Push(T item)
     {
@@ -55,6 +59,12 @@ public class Stack<T>(int capacity = 4)
 
         return _items[_count - 1];
     }
+
+    public IEnumerator<T> GetEnumerator() => (IEnumerator<T>)_items.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+
 
     private void Resize(int newSize)
     {
