@@ -106,7 +106,7 @@ public class StackTests
     [Fact]
     public void Standard_Pop_RemovesAndReturnsTopItem()
     {
-        var stack = new System.Collections.Generic.Stack<string>();
+        var stack = new Stack<string>();
 
         stack.Push("Red");
         stack.Push("Green");
@@ -122,7 +122,7 @@ public class StackTests
     [Fact]
     public void Standard_Peek_ReturnsTopItem()
     {
-        var stack = new System.Collections.Generic.Stack<string>();
+        var stack = new Stack<string>();
 
         stack.Push("Red");
         stack.Push("Green");
@@ -138,7 +138,7 @@ public class StackTests
     [Fact]
     public void Standard_PopEmpty_ThrowsInvalidOperationException()
     {
-        var stack = new System.Collections.Generic.Stack<string>();
+        var stack = new Stack<string>();
 
         stack.Push("Red");
         stack.Push("Green");
@@ -159,7 +159,7 @@ public class StackTests
     public void Standard_PushMoreItemsThanInitialCapacity_AutomaticallyDoublesCapacity()
     {
         const int initialCapacity = 4;
-        var stack = new System.Collections.Generic.Stack<string>(initialCapacity);
+        var stack = new Stack<string>(initialCapacity);
 
         stack.Push("Red");
         stack.Push("Green");
@@ -180,7 +180,7 @@ public class StackTests
     [Fact]
     public void Standard_Clear()
     {
-        var stack = new System.Collections.Generic.Stack<string>();
+        var stack = new Stack<string>();
 
         stack.Push("Red");
         stack.Push("Green");
@@ -192,9 +192,9 @@ public class StackTests
         stack.Count.Should().Be(0);
     }
 
-    private int GetStackCapacity<T>(System.Collections.Generic.Stack<T> stack)
+    private static int GetStackCapacity<T>(Stack<T> stack)
     {
-        var arrayField = typeof(System.Collections.Generic.Stack<T>)
+        var arrayField = typeof(Stack<T>)
             .GetField("_array", BindingFlags.NonPublic | BindingFlags.Instance);
 
         var array = arrayField?.GetValue(stack) as T[];
