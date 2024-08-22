@@ -18,11 +18,12 @@ public class BagTests
     [Fact]
     public void AddItemsToBag_ShouldNotBeEmpty_AndShouldHaveExpectedCount()
     {
-        var bag = new Bag<string>();
-
-        bag.Add("Red");
-        bag.Add("Green");
-        bag.Add("Blue");
+        var bag = new Bag<string>
+        {
+            "Red",
+            "Green",
+            "Blue"
+        };
 
         using var assertionScope = new AssertionScope();
         bag.IsEmpty().Should().BeFalse();
@@ -32,11 +33,12 @@ public class BagTests
     [Fact]
     public void IteratePopulatedBag_ShouldReturnAllItems()
     {
-        var bag = new Bag<string>();
-
-        bag.Add("Red");
-        bag.Add("Green");
-        bag.Add("Blue");
+        var bag = new Bag<string>
+        {
+            "Red",
+            "Green",
+            "Blue"
+        };
 
         var newBag = new Bag<string>();
         foreach (var item in bag)
