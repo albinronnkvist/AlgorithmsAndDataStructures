@@ -11,7 +11,7 @@ public interface IBag<T> : IEnumerable<T>
 
 public class Bag<T> : IBag<T>
 {
-    private readonly List<T> _items = new List<T>();
+    private readonly List<T> _items = [];
 
     public int Count => _items.Count;
 
