@@ -21,6 +21,6 @@ public class SearchSortedBenchmark
     [Benchmark]
     public void BinarySearch()
     {
-        Core.Searching.BinarySearch.Search((int[])_arr.Clone(), Index);
+        Core.Algorithms.Searching.BinarySearch.Search((int[])_arr.Clone(), Index);
     }
 }

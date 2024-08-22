@@ -21,18 +21,18 @@ public class SortBenchmark
     [Benchmark]
     public void BubbleSort()
     {
-        Core.Sorting.BubbleSort.Sort((int[])_arr.Clone());
+        Core.Algorithms.Sorting.BubbleSort.Sort((int[])_arr.Clone());
     }
 
     [Benchmark]
     public void InsertionSort()
     {
-        Core.Sorting.InsertionSort.Sort((int[])_arr.Clone());
+        Core.Algorithms.Sorting.InsertionSort.Sort((int[])_arr.Clone());
     }
 
     [Benchmark]
     public void SelectionSort()
     {
-        Core.Sorting.SelectionSort.Sort((int[])_arr.Clone());
+        Core.Algorithms.Sorting.SelectionSort.Sort((int[])_arr.Clone());
     }
 }
