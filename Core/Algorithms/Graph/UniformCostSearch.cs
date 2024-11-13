@@ -115,7 +115,7 @@ Where:
   - C*: The cost of the optimal solution.
   - ϵ: A lower bound on the cost of each action, where ϵ > 0.
 
-This be much greater than b^d, and this exponential growth occurs because UCS may explore many low-cost nodes 
+This can be much greater than b^d, and this exponential growth occurs because UCS may explore many low-cost nodes 
 before encountering nodes on the least-cost path to the goal.
 
 When all action costs are equal, UCS has a time and space complexity of O(b^(d+1))
