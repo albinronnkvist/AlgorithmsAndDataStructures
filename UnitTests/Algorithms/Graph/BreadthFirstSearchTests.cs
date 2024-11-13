@@ -15,10 +15,10 @@ public class BreadthFirstSearchTests
             Bucharest
         */
         var graph = new UndirectedGraph();
-        var arad = new Node("Arad");
-        var sibiu = new Node("Sibiu", arad);
-        var timisoara = new Node("Timisoara", arad);
-        var bucharest = new Node("Bucharest", sibiu);
+        var arad = new BfsNode("Arad");
+        var sibiu = new BfsNode("Sibiu", arad);
+        var timisoara = new BfsNode("Timisoara", arad);
+        var bucharest = new BfsNode("Bucharest", sibiu);
 
         graph.AddNode(arad);
         graph.AddNode(sibiu);
@@ -36,8 +36,8 @@ public class BreadthFirstSearchTests
     public void BFS_ShouldReturnEmptyPath_WhenNoPathExists()
     {
         var graph = new UndirectedGraph();
-        var arad = new Node("Arad");
-        var bucharest = new Node("Bucharest");
+        var arad = new BfsNode("Arad");
+        var bucharest = new BfsNode("Bucharest");
 
         graph.AddNode(arad);
         graph.AddNode(bucharest);
@@ -51,7 +51,7 @@ public class BreadthFirstSearchTests
     public void BFS_ShouldReturnStartNode_WhenStartEqualsGoal()
     {
         var graph = new UndirectedGraph();
-        var arad = new Node("Arad");
+        var arad = new BfsNode("Arad");
 
         graph.AddNode(arad);
 

@@ -2,11 +2,11 @@ namespace Albin.AlgorithmsAndDataStructures.Core.Algorithms.Graph;
 
 public class BreadthFirstSearch
 {
-    public static List<string> Execute(UndirectedGraph graph, Node startState, string goalState)
+    public static List<string> Execute(UndirectedGraph graph, BfsNode startState, string goalState)
     {
-        var frontier = new Queue<Node>();
+        var frontier = new Queue<BfsNode>();
         frontier.Enqueue(startState);
-        var reached = new HashSet<Node> { startState };
+        var reached = new HashSet<BfsNode> { startState };
         var iterations = 0;
 
         while (frontier.Count > 0)
@@ -37,13 +37,13 @@ public class BreadthFirstSearch
     }
 }
 
-public class Node
+public class BfsNode
 {
     public string State { get; }
-    public Node? Parent { get; }
+    public BfsNode? Parent { get; }
     public int Depth { get; }
 
-    public Node(string state, Node? parent = null)
+    public BfsNode(string state, BfsNode? parent = null)
     {
         State = state;
         Parent = parent;
@@ -67,13 +67,13 @@ public class Node
 
 public class UndirectedGraph
 {
-    private Dictionary<Node, List<Node>> _adjacencyList = new();
+    private Dictionary<BfsNode, List<BfsNode>> _adjacencyList = new();
 
-    public void AddNode(Node node)
+    public void AddNode(BfsNode node)
     {
         if (!_adjacencyList.ContainsKey(node))
         {
-            _adjacencyList[node] = new List<Node>();
+            _adjacencyList[node] = new List<BfsNode>();
         }
 
         if (node.Parent != null)
@@ -82,24 +82,24 @@ public class UndirectedGraph
         }
     }
 
-    public void AddEdge(Node node1, Node node2)
+    public void AddEdge(BfsNode node1, BfsNode node2)
     {
         if (!_adjacencyList.ContainsKey(node1))
         {
-            _adjacencyList[node1] = new List<Node>();
+            _adjacencyList[node1] = new List<BfsNode>();
         }
         if (!_adjacencyList.ContainsKey(node2))
         {
-            _adjacencyList[node2] = new List<Node>();
+            _adjacencyList[node2] = new List<BfsNode>();
         }
 
         _adjacencyList[node1].Add(node2);
         _adjacencyList[node2].Add(node1);
     }
 
-    public List<Node> GetNeighbors(Node node)
+    public List<BfsNode> GetNeighbors(BfsNode node)
     {
-        return _adjacencyList.ContainsKey(node) ? _adjacencyList[node] : new List<Node>();
+        return _adjacencyList.ContainsKey(node) ? _adjacencyList[node] : new List<BfsNode>();
     }
 }
 
