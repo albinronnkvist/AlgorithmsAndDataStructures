@@ -7,17 +7,14 @@ public class BreadthFirstSearch
         var frontier = new Queue<BfsNode>();
         frontier.Enqueue(startState);
         var reached = new HashSet<BfsNode> { startState };
-        var iterations = 0;
 
         while (frontier.Count > 0)
         {
-            iterations++;
             var currentNode = frontier.Dequeue();
 
             // Early goal test
             if (currentNode.State.Equals(goalState))
             {
-                Console.WriteLine($"Iterations: {iterations}");
                 return currentNode.GetPath();
             }
 
@@ -32,7 +29,6 @@ public class BreadthFirstSearch
             }
         }
 
-        Console.WriteLine($"Iterations: {iterations}");
         return new List<string>();
     }
 }
