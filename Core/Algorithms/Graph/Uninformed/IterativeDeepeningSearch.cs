@@ -1,4 +1,4 @@
-namespace Albin.AlgorithmsAndDataStructures.Core.Algorithms.Graph;
+namespace Albin.AlgorithmsAndDataStructures.Core.Algorithms.Graph.Uninformed;
 
 public class IterativeDeepeningSearch
 {

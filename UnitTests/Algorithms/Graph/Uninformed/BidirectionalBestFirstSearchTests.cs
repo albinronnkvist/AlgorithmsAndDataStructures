@@ -1,6 +1,6 @@
-using Albin.AlgorithmsAndDataStructures.Core.Algorithms.Graph;
+using Albin.AlgorithmsAndDataStructures.Core.Algorithms.Graph.Uninformed;
 
-namespace Albin.AlgorithmsAndDataStructures.UnitTests.Algorithms.Graph;
+namespace Albin.AlgorithmsAndDataStructures.UnitTests.Algorithms.Graph.Uninformed;
 
 public class BidirectionalBestFirstSearchTests
 {
