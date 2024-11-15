@@ -32,22 +32,15 @@ public class GreedyBestFirstSearch
             }
         }
 
-        return new List<string>();
+        return [];
     }
 }
 
-public class GbfsNode
+public class GbfsNode(string state, GbfsNode? parent = null, int heuristic = 0)
 {
-    public string State { get; }
-    public GbfsNode? Parent { get; }
-    public int Heuristic { get; }
-
-    public GbfsNode(string state, GbfsNode? parent = null, int heuristic = 0)
-    {
-        State = state;
-        Parent = parent;
-        Heuristic = heuristic;
-    }
+    public string State { get; } = state;
+    public GbfsNode? Parent { get; } = parent;
+    public int Heuristic { get; } = heuristic;
 
     public List<string> GetPath()
     {
@@ -64,39 +57,39 @@ public class GbfsNode
     }
 }
 
-public class GbfsEdge
+public class GbfsEdge(GbfsNode node, int cost)
 {
-    public GbfsNode Node { get; }
-    public int Cost { get; }
-
-    public GbfsEdge(GbfsNode node, int cost)
-    {
-        Node = node;
-        Cost = cost;
-    }
+    public GbfsNode Node { get; } = node;
+    public int Cost { get; } = cost;
 }
 
 public class GbfsGraph
 {
-    private Dictionary<string, List<GbfsEdge>> _adjacencyList = new();
+    private readonly Dictionary<string, List<GbfsEdge>> _adjacencyList = [];
 
     public void AddEdge(GbfsNode fromNode, GbfsNode toNode, int cost)
     {
-        if (!_adjacencyList.ContainsKey(fromNode.State))
+        if (!_adjacencyList.TryGetValue(fromNode.State, out List<GbfsEdge>? fromValue))
         {
-            _adjacencyList[fromNode.State] = new List<GbfsEdge>();
+            _adjacencyList[fromNode.State] = [];
         }
-        if (!_adjacencyList.ContainsKey(toNode.State))
+        else 
         {
-            _adjacencyList[toNode.State] = new List<GbfsEdge>();
+            fromValue.Add(new GbfsEdge(toNode, cost));
         }
 
-        _adjacencyList[fromNode.State].Add(new GbfsEdge(toNode, cost));
-        _adjacencyList[toNode.State].Add(new GbfsEdge(fromNode, cost));
+        if (!_adjacencyList.TryGetValue(toNode.State, out List<GbfsEdge>? toValue))
+        {
+            _adjacencyList[toNode.State] = [];
+        }
+        else
+        {
+            toValue.Add(new GbfsEdge(fromNode, cost));
+        }
     }
 
     public List<GbfsEdge> GetNeighbors(GbfsNode node)
     {
-        return _adjacencyList.ContainsKey(node.State) ? _adjacencyList[node.State] : new List<GbfsEdge>();
+        return _adjacencyList.TryGetValue(node.State, out List<GbfsEdge>? value) ? value : [];
     }
 }
