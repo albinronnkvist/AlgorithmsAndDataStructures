@@ -2,12 +2,12 @@ namespace Albin.AlgorithmsAndDataStructures.Core.Algorithms.Graph.Informed;
 
 public class GreedyBestFirstSearch
 {
-    public static List<string> Execute(GbfsGraph graph, GbfsNode start, string goalState)
+    public static List<string> Execute(GbfsGraph graph, GbfsNode start, string goalState, Func<string, int> heuristic)
     {
         var frontier = new PriorityQueue<GbfsNode, int>();
         var reached = new HashSet<string>();
         
-        frontier.Enqueue(start, start.Heuristic);
+        frontier.Enqueue(start, heuristic(start.State));
         reached.Add(start.State);
 
         while (frontier.Count > 0)
@@ -22,12 +22,12 @@ public class GreedyBestFirstSearch
 
             foreach (var edge in graph.GetNeighbors(currentNode))
             {
-                var childNode = new GbfsNode(edge.Node.State, currentNode, edge.Node.Heuristic);
+                var childNode = new GbfsNode(edge.Node.State, currentNode);
 
                 if (!reached.Contains(childNode.State))
                 {
                     reached.Add(childNode.State);
-                    frontier.Enqueue(childNode, childNode.Heuristic);
+                    frontier.Enqueue(childNode, heuristic(childNode.State));
                 }
             }
         }
@@ -36,11 +36,10 @@ public class GreedyBestFirstSearch
     }
 }
 
-public class GbfsNode(string state, GbfsNode? parent = null, int heuristic = 0)
+public class GbfsNode(string state, GbfsNode? parent = null)
 {
     public string State { get; } = state;
     public GbfsNode? Parent { get; } = parent;
-    public int Heuristic { get; } = heuristic;
 
     public List<string> GetPath()
     {

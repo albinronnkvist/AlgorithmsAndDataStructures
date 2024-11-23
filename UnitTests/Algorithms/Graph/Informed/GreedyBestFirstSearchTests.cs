@@ -27,15 +27,15 @@ public class GreedyBestFirstSearchTests
     {
         var graph = new GbfsGraph();
 
-        // Nodes with heuristic values towards Bucharest
-        var arad = new GbfsNode("Arad", null, 366);
-        var zerind = new GbfsNode("Zerind", null, 374);
-        var oradea = new GbfsNode("Oradea", null, 380);
-        var sibiu = new GbfsNode("Sibiu", null, 253);
-        var rimnicuVilcea = new GbfsNode("Rimnicu Vilcea", null, 193);
-        var fagaras = new GbfsNode("Fagaras", null, 176);
-        var pitesti = new GbfsNode("Pitesti", null, 100);
-        var bucharest = new GbfsNode("Bucharest", null, 0);
+        // Nodes
+        var arad = new GbfsNode("Arad");
+        var zerind = new GbfsNode("Zerind");
+        var oradea = new GbfsNode("Oradea");
+        var sibiu = new GbfsNode("Sibiu");
+        var rimnicuVilcea = new GbfsNode("Rimnicu Vilcea");
+        var fagaras = new GbfsNode("Fagaras");
+        var pitesti = new GbfsNode("Pitesti");
+        var bucharest = new GbfsNode("Bucharest");
 
         // Edges with travel costs
         graph.AddEdge(arad, zerind, 75);
@@ -47,7 +47,21 @@ public class GreedyBestFirstSearchTests
         graph.AddEdge(fagaras, bucharest, 211);
         graph.AddEdge(pitesti, bucharest, 101);
 
-        var result = GreedyBestFirstSearch.Execute(graph, arad, "Bucharest");
+        // Heuristic values
+        static int heuristic(string state) => state switch
+        {
+            "Arad" => 366,
+            "Zerind" => 374,
+            "Oradea" => 380,
+            "Sibiu" => 253,
+            "Rimnicu Vilcea" => 193,
+            "Fagaras" => 176,
+            "Pitesti" => 100,
+            "Bucharest" => 0,
+            _ => int.MaxValue
+        };
+
+        var result = GreedyBestFirstSearch.Execute(graph, arad, "Bucharest", heuristic);
 
         result.Should().BeEquivalentTo(new List<string> { "Arad", "Sibiu", "Fagaras", "Bucharest" }, options => options.WithStrictOrdering());
     }
